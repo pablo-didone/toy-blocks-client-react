@@ -20,9 +20,14 @@ export class Nodes extends React.Component {
   }
 
   toggleNodeExpanded(node) {
+    const isNodeExpanded = node.url === this.state.expandedNodeURL;
+
+    if (!isNodeExpanded) {
+      this.props.actions.loadBlocks(node);
+    }
+
     this.setState({
-      expandedNodeURL:
-        node.url === this.state.expandedNodeURL ? null : node.url,
+      expandedNodeURL: isNodeExpanded ? null : node.url,
     });
   }
 
